@@ -48,3 +48,15 @@ This middleware secures your routes by verifying the user's session:
 6. **Context Attachment**: Attaches the full user object to the `req` object (`req.user`) so downstream controllers can access the authenticated user's details.
 7. **Proceed**: Calls `next()` to pass control to the next middleware or route handler.
 
+### Onboarding Flow Guide
+This controller handles the completion of the user profile after initial signup:
+
+1. **User Identification**: Retrieves the `userId` from the authenticated request (`req.user._id`), ensuring the user is logged in.
+2. **Input Extraction**: Extracts profile details (fullName, bio, nativeLanguage, learningLanguage, location) from the request body.
+3. **Validation**: Checks if all required fields are provided. If any are missing, it returns a 400 error specifying which fields are missing.
+4. **Database Update**: Updates the user document in MongoDB:
+    - Applies the new profile information.
+    - Sets the `isOnBoarding` flag to `true`, marking the process as complete.
+    - Returns the updated document (`new: true`).
+5. **Stream Integration**: Synchronizes the updated user profile (name and image) with the Stream Chat service.
+6. **Response**: Returns the fully updated user object to the frontend.
