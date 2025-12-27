@@ -159,7 +159,19 @@ export async function isOnboarding(req,res){
         }
         
         // TODO : update user in stream also
+       
+        try {
+            await upsertStreamChat({
+                id: userUpdated._id.toString(),
+                fullName: userUpdated.fullName,
+                image: userUpdated.profilePic  || ""
+            })
+            console.log("Stream user updated after onboarding for",userUpdated.fullName);
+        } catch (streamError) {
+            console.log("Error updating stream user dring onboarding",streamError.message);
+        }
 
+        
         res.status(200).json({success: true, user: userUpdated});
 
     } catch (error) {
