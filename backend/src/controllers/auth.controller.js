@@ -122,3 +122,48 @@ export async function logout(req,res){
     res.status(200).json({ success: true, message: "Logout succesfully"});
 
 }
+
+// to update the profile before that if will verify the jwt token for access(protectRoute)
+export async function isOnboarding(req,res){
+    try {
+        const userId = req.user._id;
+        const {fullName,bio,nativeLanguage,learningLanguage,location} = req.body;
+
+        if(!fullName || !bio || !nativeLanguage || !learningLanguage || !location){
+            return res.status(400).json({
+                message: "All Fields are required!",
+                missingFields: [ 
+                    !fullName && "fullName",
+                    !bio && "bio",
+                    !nativeLanguage && "nativeLanguage",
+                    !learningLanguage && "learningLanguage",
+                    !location && "location "
+                ].filter(Boolean),
+            },)
+        }
+        // update the user data in database with the new data
+        const userUpdated = await User.findByIdAndUpdate(
+            userId,
+            {
+                ...req.body,
+                isOnBoarding: true,
+            },
+            {
+                new: true  // makes this function to return updated user ie userUpdated
+            }
+        );
+
+        // check if userUpdate is null
+        if(!userUpdated){
+            return res.status(404).json({ message: "User not found"});
+        }
+        
+        // TODO : update user in stream also
+
+        res.status(200).json({success: true, user: userUpdated});
+
+    } catch (error) {
+        console.log("Onboarding error:",error);
+        res.status(500).json({message: "Internal Server Error"})
+    }
+}
