@@ -21,5 +21,13 @@ export const upsertStreamChat = async (userData) => {
 
 // todo: Later we will create
 export const generateStreamToken = (userId) =>{
-
+    try {
+        // make sure to convert userId to string
+        const userIdStr = String(userId);
+        const token = streamClient.createToken(userIdStr);
+        return token;
+    } catch (error) {
+        console.error("Error generating stream token:",error);
+        
+    }
 }
