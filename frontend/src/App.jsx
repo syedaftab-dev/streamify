@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { use, useEffect, useState } from 'react'
 import {Routes,Route} from "react-router"
 import HomePage from "./pages/HomePage"
 import SignUpPage from "./pages/SignUpPage"
@@ -8,13 +8,23 @@ import OnboardingPage from "./pages/OnboardingPage"
 import CallPage from "./pages/CallPage"
 import ChatPage from "./pages/ChatPage"
 import toast,{Toaster} from "react-hot-toast"
+import { axiosInstance } from './lib/axios'
 
 function App() {
+
+  const {data,isLoading,error}=useQuery({
+    queryKey:["todos"],
+    queryFn: async ()=>{
+      const res=await axiosInstance.get("/auth/me");
+      return res.data;
+    },
+    retry: false, // fetch only once
+  })
+
+  console.log(data);
+
   return (
     <div className="h-screen" data-theme="night">
-      <button onClick={()=>toast.success("hello world!")}>
-        Show Toast
-      </button>
       <Routes>
         <Route path="/" element={<HomePage/>}/>
         <Route path="/signup" element={ <SignUpPage />}/>
