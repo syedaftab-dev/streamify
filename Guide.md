@@ -60,3 +60,46 @@ This controller handles the completion of the user profile after initial signup:
     - Returns the updated document (`new: true`).
 5. **Stream Integration**: Synchronizes the updated user profile (name and image) with the Stream Chat service.
 6. **Response**: Returns the fully updated user object to the frontend.
+
+
+## Tanstack Query Guide
+### 1. use the command - npm i @tanstack/react-query to install the react query package
+
+
+        const [data, setData] = useState([]);
+        const [isLoading, setIsLoading] = useState(false);
+        const [error, setError] = useState(null);
+
+        useEffect(()=>{
+            const getData = async () => {
+            setIsLoading(true);
+            try {
+                const data = await fetch("https://jsonplaceholder.typicode.com/todos");
+                const json = await data.json();
+                setData(json);
+            } catch (error) {
+                setError(error);
+            }finally {
+                setIsLoading(false);
+            }
+            }
+            
+            getData();
+        },[]);
+
+        console.log(data);
+
+The above is to fetch the data from api but if it fails it doesnt do it again,where tanstack query refetch is 3-4 times
+
+### 2. Instead of above code we can use tanstack query
+
+            const {data,isLoading,error}=useQuery({
+                queryKey:["todos"],
+                queryFn: async ()=>{
+                const res=await axiosInstance.get("/auth/me");
+                return res.data;
+                },
+                retry: false, // fetch only once
+            })
+
+            console.log(data);
