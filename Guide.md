@@ -103,3 +103,20 @@ The above is to fetch the data from api but if it fails it doesnt do it again,wh
             })
 
             console.log(data);
+
+## Query Flow
+        1. React app loads
+        2. useQuery runs automatically
+        3. GET /auth/me is called
+        4. JWT token sent in headers
+        5. protectRoute verifies token
+        6. Backend attaches req.user
+        7. Backend returns user data
+        8. React Query stores data in cache
+
+# Frontend Pages
+## 1. signup page
+
+### This div creates a clean, responsive card container: it uses flex with flex-col to stack content vertically on mobile and switches to lg:flex-row to place sections side-by-side on large screens, w-full with max-w-5xl and mx-auto keeps it centered and readable on all screen sizes, bg-base-100, border border-primary/25, rounded-xl, and shadow-lg give it a modern card look, and overflow-hidden ensures child content doesn’t break the rounded corners—this is a production-ready layout pattern commonly used for auth pages and split sections.
+
+    className='border border-primary/25 flex flex-col lg:flex-row w-full max-w-5xl mx-auto bg-base-100 rounded-xl shadow-lg overflow-hidden'
