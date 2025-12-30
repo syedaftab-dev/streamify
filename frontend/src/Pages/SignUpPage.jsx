@@ -13,7 +13,7 @@ function SignUpPage() {
     password: ""
   })
 
-  const QueryClient = useQueryClient();
+  const queryClient = useQueryClient();
 
   const {mutate: signupMutation, isPending, error} = useMutation({
     mutationFn:signup,
