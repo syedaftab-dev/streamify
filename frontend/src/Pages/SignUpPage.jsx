@@ -2,8 +2,6 @@ import React, { useState } from 'react'
 import { ShipWheelIcon } from "lucide-react"
 import { Link } from 'react-router'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
-import { signup } from '../lib/api'
-
 function SignUpPage() {
 
   // state to add data of user when he submit signu page
@@ -13,13 +11,7 @@ function SignUpPage() {
     password: ""
   })
 
-  const queryClient = useQueryClient();
-
-  const {mutate: signupMutation, isPending, error} = useMutation({
-    mutationFn:signup,
-    // on successfull signup we have to render the home page
-    onSuccess: ()=> queryClient.invalidateQueries({queryKey: ["authUser"]})
-  });
+  const {error,isPending,signupMutation}=useSignUp();
 
   const handleSignup = (e) => {
     e.preventDefault();
