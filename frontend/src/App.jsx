@@ -10,6 +10,7 @@ import ChatPage from "./pages/ChatPage"
 import {Toaster} from "react-hot-toast"
 import PageLoader from './components/PageLoader'
 import { useAuthUser } from './hooks/useAuthUser.js'
+import Layout from './components/Layout.jsx'
 
 function App() {
 
@@ -23,13 +24,15 @@ function App() {
   }
 
   return (
-    <div className="h-screen" data-theme="night">
+    <div className="h-screen" data-theme="forest">
       <Routes>
        
         {/* if user is authenticated and onboarded just redirect to home page orelse if not authenticated to login orelse onboarding page */}
         <Route path="/" element={
           isAuthenticated && isOnboarded ? 
-          <HomePage/> : <Navigate to={!isAuthenticated ? "/login" : "/onboarding"}/>
+          <Layout showSidebar={true}>
+            <HomePage/>
+          </Layout> : <Navigate to={!isAuthenticated ? "/login" : "/onboarding"}/>
         }/> 
 
         <Route path="/signup" element={ !isAuthenticated ? <SignUpPage /> : (
