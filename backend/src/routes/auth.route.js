@@ -10,7 +10,7 @@ router.post("/login",login);
 
 router.post("/logout",logout);
 
-router.post("/onboard",protectRoute,isOnboarding);
+router.post("/onboarding",protectRoute,isOnboarding);
 
 // check if user is loged in or not
 router.get("/me",protectRoute,(req,res)=>{

@@ -16,7 +16,7 @@ function App() {
   const {isLoading,authUser} = useAuthUser(); // will will goto auth/me and get the authenticated user from backend
 
   const isAuthenticated = Boolean(authUser);
-  const isOnboarded = authUser?.isOnboarded; // checks if the user is already onboarded
+  const isOnboarded = authUser?.isOnBoarding; // checks if the user is already onboarded
 
   if(isLoading){
     return <PageLoader />;
