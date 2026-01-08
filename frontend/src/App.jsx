@@ -11,11 +11,12 @@ import {Toaster} from "react-hot-toast"
 import PageLoader from './components/PageLoader'
 import { useAuthUser } from './hooks/useAuthUser.js'
 import Layout from './components/Layout.jsx'
+import { useThemeStore } from './store/useThemeStore.js'
 
 function App() {
 
   const {isLoading,authUser} = useAuthUser(); // will will goto auth/me and get the authenticated user from backend
-
+  const {theme} = useThemeStore();
   const isAuthenticated = Boolean(authUser);
   const isOnboarded = authUser?.isOnBoarding; // checks if the user is already onboarded
 
@@ -24,7 +25,7 @@ function App() {
   }
 
   return (
-    <div className="h-screen" data-theme="forest">
+    <div className="h-screen" data-theme={theme}>
       <Routes>
        
         {/* if user is authenticated and onboarded just redirect to home page orelse if not authenticated to login orelse onboarding page */}

@@ -2,6 +2,8 @@ import React, { useState } from 'react'
 import { ShipWheelIcon } from "lucide-react"
 import { Link } from 'react-router'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
+import useSignUp from '../hooks/useSignUp.js'
+
 function SignUpPage() {
 
   // state to add data of user when he submit signu page

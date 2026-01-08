@@ -119,4 +119,20 @@ The above is to fetch the data from api but if it fails it doesnt do it again,wh
 
 ### This div creates a clean, responsive card container: it uses flex with flex-col to stack content vertically on mobile and switches to lg:flex-row to place sections side-by-side on large screens, w-full with max-w-5xl and mx-auto keeps it centered and readable on all screen sizes, bg-base-100, border border-primary/25, rounded-xl, and shadow-lg give it a modern card look, and overflow-hidden ensures child content doesn’t break the rounded corners—this is a production-ready layout pattern commonly used for auth pages and split sections.
 
-    className='border border-primary/25 flex flex-col lg:flex-row w-full max-w-5xl mx-auto bg-base-100 rounded-xl shadow-lg overflow-hidden'
+    className='border border-primary/25 flex flex-col lg:fex-row w-full max-w-5xl mx-auto bg-base-100 rounded-xl shadow-lg overflow-hidden'
+
+## Zustand Guide
+
+### 1. Installation
+    npm install zustand
+
+### 2. Create Store
+    import { create } from 'zustand';
+
+    export const useStore = create((set) => ({
+        count: 0,
+        inc: () => set((state) => ({ count: state.count + 1 })),
+    }));
+
+### 3. Usage
+    const { count, inc } = useStore();
