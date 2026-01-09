@@ -1,6 +1,6 @@
 import React from 'react'
-import { Link } from 'react-router-dom';
-import { LANGUAGE_TO_FLAG } from '../lib/constants.js';
+import { Link } from 'react-router';
+import { LANGUAGE_TO_FLAG } from '../constant/index.js';
 
 function FriendCard({friend}) {
   return (

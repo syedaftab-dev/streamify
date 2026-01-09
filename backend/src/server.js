@@ -23,7 +23,7 @@ app.use(cookieParser())
 app.use("/api/auth", authRoutes);
 
 // router for users
-app.use("/api/user",userRoutes);
+app.use("/api/users",userRoutes);
 
 // for chat and video calling we will add later
 app.use("/api/chat",chatRoutes);
