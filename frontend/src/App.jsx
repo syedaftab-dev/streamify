@@ -45,7 +45,14 @@ function App() {
           !isOnboarded ? <Navigate to="/onboarding" /> : <Navigate to="/"/>
         )}/>
         
-        <Route path="/notifications" element={isAuthenticated ? <NotificationsPage /> : <Navigate to="/login"/>}/>
+        <Route path="/notifications" element={isAuthenticated ? (
+          <Layout showSidebar={true}>
+            <NotificationsPage/>
+          </Layout>
+        ) : (
+          <Navigate to={!isAuthenticated ? "/login" : "/onboarding"}/>
+        )}/>
+        
         
         <Route
           path="/onboarding"

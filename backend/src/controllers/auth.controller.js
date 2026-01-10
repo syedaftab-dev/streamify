@@ -32,7 +32,6 @@ export async function signup(req,res){
 
         // lets generate a number b/w 1-100 to get a avatar/profile pic from an API
         const randomAvatar = `https://api.dicebear.com/7.x/avataaars/svg?seed=${Math.floor(Math.random() * 1000) + 1}`;
-
         // create a new user
         const newUser = await User.create({
             email,
