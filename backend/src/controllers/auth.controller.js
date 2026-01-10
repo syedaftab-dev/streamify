@@ -31,8 +31,7 @@ export async function signup(req,res){
         }
 
         // lets generate a number b/w 1-100 to get a avatar/profile pic from an API
-        const idx = Math.floor(Math.random()*100)+1;
-        const randomAvatar = `https://avatar.iran.liara.run/public/${idx}.png`;
+        const randomAvatar = `https://api.dicebear.com/7.x/avataaars/svg?seed=${Math.floor(Math.random() * 1000) + 1}`;
 
         // create a new user
         const newUser = await User.create({
@@ -146,7 +145,7 @@ export async function isOnboarding(req,res){
             userId,
             {
                 ...req.body,
-                isOnBoarding: true,
+                isOnBoarded: true,
             },
             {
                 new: true  // makes this function to return updated user ie userUpdated
@@ -163,7 +162,7 @@ export async function isOnboarding(req,res){
         try {
             await upsertStreamChat({
                 id: userUpdated._id.toString(),
-                fullName: userUpdated.fullName,
+                name: userUpdated.fullName,
                 image: userUpdated.profilePic  || ""
             })
             console.log("Stream user updated after onboarding for",userUpdated.fullName);

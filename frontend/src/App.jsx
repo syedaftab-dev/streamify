@@ -1,6 +1,6 @@
 import React from 'react'
 import {Routes,Route, Navigate} from "react-router"
-import HomePage from "./pages/HomePage"
+import HomePage from './Pages/HomePage.jsx'
 import SignUpPage from "./pages/SignUpPage"
 import LoginPage from "./pages/LoginPage"
 import NotificationsPage from "./pages/NotificationsPage"
@@ -18,7 +18,7 @@ function App() {
   const {isLoading,authUser} = useAuthUser(); // will will goto auth/me and get the authenticated user from backend
   const {theme} = useThemeStore();
   const isAuthenticated = Boolean(authUser);
-  const isOnboarded = authUser?.isOnBoarding; // checks if the user is already onboarded
+  const isOnboarded = authUser?.isOnBoarded; // checks if the user is already onboarded
 
   if(isLoading){
     return <PageLoader />;
