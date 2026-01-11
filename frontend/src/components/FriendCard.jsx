@@ -3,6 +3,8 @@ import { Link } from 'react-router';
 import { LANGUAGE_TO_FLAG } from '../constant/index.js';
 
 function FriendCard({friend}) {
+  console.log(friend.nativeLanguage);
+  console.log(friend.learningLanguage);
   return (
     <div className='card bg-base-200 hover:shadow-md transition-shadow'>
       
