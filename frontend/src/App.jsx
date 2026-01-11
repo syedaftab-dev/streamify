@@ -12,6 +12,7 @@ import PageLoader from './components/PageLoader'
 import { useAuthUser } from './hooks/useAuthUser.js'
 import Layout from './components/Layout.jsx'
 import { useThemeStore } from './store/useThemeStore.js'
+import { LayoutGrid } from 'lucide-react'
 
 function App() {
 
@@ -71,7 +72,13 @@ function App() {
         
         <Route path="/call" element={isAuthenticated ? <CallPage /> : <Navigate to="/login"/>}/>
         
-        <Route path="/chat" element={isAuthenticated ? <ChatPage /> : <Navigate to="/login"/>}/>
+        <Route path="/chat/:id" element={isAuthenticated && isOnboarded ? (
+          <Layout showSidebar={false}>
+            <ChatPage/>
+          </Layout>
+        ):(
+          <Navigate to={!isAuthenticated ? "/login" : "/onboarding"}/>
+        )}/>
       </Routes>
 
       <Toaster />
